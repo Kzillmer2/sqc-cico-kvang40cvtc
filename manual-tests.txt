@@ -73,4 +73,13 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 * The application completely quits when the window is closed.
 * No lingering processes remain.
 
+Module 6: Ticket 601 - Auto Submit after last digit
+
+## Test steps
+1. Build and run CiCo.
+2. Type 00000000 into the field and wait.
+
+## Expected results
+* The status panel should appear automatically after the 8th digit is entered.
+* There should be no Update button visible on the main panel.
 

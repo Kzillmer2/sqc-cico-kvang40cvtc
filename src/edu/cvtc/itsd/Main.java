@@ -42,7 +42,16 @@ public class Main {
         throws BadLocationException
     {
       if (fb.getDocument() != null) {
-        super.insertString(fb, offset, stringToAdd, attr);
+        int currentLength = fb.getDocument().getLength();
+        int newLength = currentLength + stringToAdd.length();
+        if (newLength <= MAX_LENGTH) {
+          super.insertString(fb, offset, stringToAdd, attr);
+        } else {
+          Toolkit.getDefaultToolkit().beep();
+        }
+        if (newLength == MAX_LENGTH) {
+          Main.processCard();
+        }
       }
       else {
         Toolkit.getDefaultToolkit().beep();
@@ -54,18 +63,19 @@ public class Main {
         throws BadLocationException
     {
       if (fb.getDocument() != null) {
+        int currentLength = fb.getDocument().getLength();
+        int newLength = currentLength + lengthToDelete + stringToAdd.length();
+        if (newLength <= MAX_LENGTH) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+      } else{
+          Toolkit.getDefaultToolkit().beep();
+        }
+        if (newLength == MAX_LENGTH) {
+        Main.processCard();}
       }
       else {
         Toolkit.getDefaultToolkit().beep();
       }
-    }
-  }
-
-  // Lookup the card information after button press ///////////////////////////
-  public static class Update implements ActionListener {
-    public void actionPerformed(ActionEvent evt) {
-      Main.processCard();
     }
   }
 
@@ -261,11 +271,6 @@ public class Main {
     fieldNumber.setForeground(Color.magenta);
     panelMain.add(fieldNumber);
 
-    JButton updateButton = new JButton("Update");
-    updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
-    panelMain.add(updateButton);
 
     panelMain.add(Box.createVerticalGlue());
 

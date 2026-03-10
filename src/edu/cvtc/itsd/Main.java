@@ -64,7 +64,7 @@ public class Main {
     {
       if (fb.getDocument() != null) {
         int currentLength = fb.getDocument().getLength();
-        int newLength = currentLength + lengthToDelete + stringToAdd.length();
+        int newLength = currentLength - lengthToDelete + stringToAdd.length();
         if (newLength <= MAX_LENGTH) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
       } else{
